@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+from __future__ import annotations
+
+import typing
+
 import tiles
 
 
@@ -9,7 +13,7 @@ class Ship(object):
     """
 
     # The line to draw depending on how it connects to (top, right, bottom, left) neighbors.
-    LINES = {
+    LINES: typing.Mapping[typing.Tuple, str] = {
         (True, False, True, False, ): '║',  # ASCII 186
         (False, True, False, True, ): '═',  # ASCII 205
 
@@ -26,7 +30,11 @@ class Ship(object):
         (True, True, True, True, ):   '╬',  # ASCII 206
     }
 
-    def __init__(self, definition):
+    def __init__(self, definition: typing.Sequence[typing.Sequence[typing.Optional[str]]]) -> None:
+        """Create a ship from a 2D array of string tile abbreviations.
+
+        :param definition: 2D array of tile abbreviations.
+        """
         structure = []
 
         for y, definition_row in enumerate(definition):
@@ -41,15 +49,30 @@ class Ship(object):
 
             structure.append(ship_row)
 
-        self._structure = structure
+        self._structure: typing.Sequence[typing.Sequence[typing.Optional[tiles.Tile]]] = structure
 
-    def get_tile_by_position(self, x, y):
+    def get_tile_by_position(self, x: int, y: int) -> tiles.Tile:
+        """Retrieve a tile by coordinates.
+
+        :param x: The horizontal position.
+
+        :param y: The vertical position.
+
+        :return: The tile, or None if no tile exists at that position.
+
+        """
         return self._structure[y][x]
 
-    def render(self, screen):
+    def draw(self, screen: typing.Any) -> None:
+        """Draw a ship to ASCII.
 
-        horizontal_line = self.LINES.get((False, True, False, True,))
-        vertical_line = self.LINES.get((True, False, True, False,))
+        :param screen: The curses window.
+        :type screen: The curses window as returned from curses.initscr() et al.
+
+        """
+
+        horizontal_line: typing.Optional[str] = self.LINES.get((False, True, False, True, ))
+        vertical_line: typing.Optional[str] = self.LINES.get((True, False, True, False, ))
 
         for y, structure_row in enumerate(self._structure):
             for x, active_tile in enumerate(structure_row):

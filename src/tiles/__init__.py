@@ -8,5 +8,3 @@ def tile_subclasses(cls):
 
 
 TILES = {t.ABBREVIATION: t for t in tile_subclasses(Tile)}
-
-TILE_SIZE = 5

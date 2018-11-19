@@ -4,6 +4,8 @@
 
 """
 
+from __future__ import annotations
+
 import curses
 
 import ship
@@ -53,7 +55,7 @@ def start_main_loop(screen):
             ['cr', 'cr', 'cr', ],
             [None, 'cr', None, ],
         ])
-        s.render(screen)
+        s.draw(screen)
 
         # Refresh the screen
         screen.refresh()
