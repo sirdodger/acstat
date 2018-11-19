@@ -13,6 +13,13 @@ class Tile(object):
 
     """
 
+    DOORS = {
+        'n': True,
+        's': True,
+        'e': True,
+        'w': True,
+    }
+
     SIZE = 5
     WALL_CHAR = '#'
 
@@ -46,6 +53,16 @@ class Tile(object):
             raise ValueError('Bad direction: {}'.format(direction))
 
         return self.has_neighbor(corner) or self.has_neighbor(direction)
+
+    def has_door(self, direction: str) -> bool:
+        """Does the tile have a door in a particular direction.
+
+        :param direction: The string defining the direction in which to check for a door.  (e.g., 'n', 'sw', etc.)
+
+        :return: True if door exists, False otherwise.
+
+        """
+        return self.DOORS.get(direction) and self.has_neighbor(direction)
 
     def has_neighbor(self, direction: str) -> bool:
         """Does the tile have a neighbor in a particular direction?

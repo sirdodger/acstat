@@ -35,6 +35,7 @@ class Ship(object):
 
         :param definition: 2D array of tile abbreviations.
         """
+        self.size = 0
         structure = []
 
         for y, definition_row in enumerate(definition):
@@ -44,6 +45,7 @@ class Ship(object):
                 tile_class = tiles.TILES.get(tile_abbreviation)
                 if tile_class:
                     ship_row.append(tile_class(self, x, y))
+                    self.size += 1
                 else:
                     ship_row.append(None)
 
@@ -79,25 +81,35 @@ class Ship(object):
 
                 if active_tile is not None:
 
-                    top_wall = '{top_left}{wall}{top_right}'.format(
+                    half_wall = horizontal_line * int(active_tile.SIZE / 2)
+                    top_wall = '{top_left}{half_wall}{door}{half_wall}{top_right}'.format(
                         top_left=self.LINES.get(
                             (active_tile.corner_extends('nw', 'n'), True, True, active_tile.corner_extends('nw', 'w'), )
                         ),
-                        wall=horizontal_line * active_tile.SIZE,
+                        half_wall=half_wall,
+                        door=' ' if active_tile.has_door('n') else horizontal_line,
                         top_right=self.LINES.get(
                             (active_tile.corner_extends('ne', 'n'), active_tile.corner_extends('ne', 'e'), True, True, )
                         )
                     )
+
                     side_wall = '{vertical}{tile}{vertical}'.format(
                         vertical=vertical_line,
                         tile='x' * active_tile.SIZE
                     )
 
-                    bottom_wall = '{bottom_left}{wall}{bottom_right}'.format(
+                    door_wall = '{vertical_left}{tile}{vertical_right}'.format(
+                        vertical_left=' ' if active_tile.has_door('w') else vertical_line,
+                        vertical_right=' ' if active_tile.has_door('e') else vertical_line,
+                        tile='x' * active_tile.SIZE
+                    )
+
+                    bottom_wall = '{bottom_left}{half_wall}{door}{half_wall}{bottom_right}'.format(
                         bottom_left=self.LINES.get(
                             (True, True, active_tile.corner_extends('sw', 's'), active_tile.corner_extends('sw', 'w'), )
                         ),
-                        wall=horizontal_line * active_tile.SIZE,
+                        half_wall=half_wall,
+                        door=' ' if active_tile.has_door('s') else horizontal_line,
                         bottom_right=self.LINES.get(
                             (True, active_tile.corner_extends('se', 'e'), active_tile.corner_extends('se', 's'), True,)
                         )
@@ -107,8 +119,18 @@ class Ship(object):
                     offset_left = x * (active_tile.SIZE + 1)
                     offset_top = y * (active_tile.SIZE + 1)
 
+                    # Draw top wall
                     screen.addstr(offset_top, offset_left, top_wall)
-                    for i in range(1, active_tile.SIZE + 1):
+
+                    # Draw top of middle walls
+                    middle = int(active_tile.SIZE / 2) + 1
+                    for i in range(1, middle):
+                        screen.addstr(offset_top + i, offset_left, side_wall)
+                    # Draw door wall
+                    screen.addstr(offset_top + middle, offset_left, door_wall)
+                    # Draw bottom of middle walls
+                    for i in range(middle + 1, active_tile.SIZE + 1):
                         screen.addstr(offset_top + i, offset_left, side_wall)
 
+                    # Draw bottom wall
                     screen.addstr(offset_top + active_tile.SIZE + 1, offset_left, bottom_wall)

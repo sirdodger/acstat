@@ -6,5 +6,16 @@ from .tile import Tile
 
 
 class CargoTile(Tile):
+    """Stores supplemental mission equipment.
+
+    """
 
     ABBREVIATION = 'cr'
+
+    # Top, right, bottom, left
+    DOORS = {
+        'n': True,
+        's': True,
+        'e': True,
+        'w': True,
+    }
