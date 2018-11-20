@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 
+"""A ship structure and interior layout.
+
+"""
+
 from __future__ import annotations
 
+import math
 import typing
 
 import tiles
@@ -35,7 +40,7 @@ class Ship(object):
 
         :param definition: 2D array of tile abbreviations.
         """
-        self.size = 0
+        tile_count = 0
         structure = []
 
         for y, definition_row in enumerate(definition):
@@ -45,12 +50,14 @@ class Ship(object):
                 tile_class = tiles.TILES.get(tile_abbreviation)
                 if tile_class:
                     ship_row.append(tile_class(self, x, y))
-                    self.size += 1
+                    tile_count += 1
                 else:
                     ship_row.append(None)
 
             structure.append(ship_row)
 
+        # The size of a ship determines difficulty numbers, targeting silhouette, etc.
+        self.size = int(math.ceil(((tile_count - 6) / 3.0 ) + 4))
         self._structure: typing.Sequence[typing.Sequence[typing.Optional[tiles.Tile]]] = structure
 
     def get_tile_by_position(self, x: int, y: int) -> tiles.Tile:
@@ -73,8 +80,8 @@ class Ship(object):
 
         """
 
-        horizontal_line: typing.Optional[str] = self.LINES.get((False, True, False, True, ))
-        vertical_line: typing.Optional[str] = self.LINES.get((True, False, True, False, ))
+        horizontal_line: str = self.LINES[(False, True, False, True, )]
+        vertical_line: str = self.LINES[(True, False, True, False, )]
 
         for y, structure_row in enumerate(self._structure):
             for x, active_tile in enumerate(structure_row):
@@ -83,14 +90,14 @@ class Ship(object):
 
                     half_wall = horizontal_line * int(active_tile.SIZE / 2)
                     top_wall = '{top_left}{half_wall}{door}{half_wall}{top_right}'.format(
-                        top_left=self.LINES.get(
+                        top_left=self.LINES[
                             (active_tile.corner_extends('nw', 'n'), True, True, active_tile.corner_extends('nw', 'w'), )
-                        ),
+                        ],
                         half_wall=half_wall,
                         door=' ' if active_tile.has_door('n') else horizontal_line,
-                        top_right=self.LINES.get(
+                        top_right=self.LINES[
                             (active_tile.corner_extends('ne', 'n'), active_tile.corner_extends('ne', 'e'), True, True, )
-                        )
+                        ]
                     )
 
                     side_wall = '{vertical}{tile}{vertical}'.format(
@@ -105,14 +112,14 @@ class Ship(object):
                     )
 
                     bottom_wall = '{bottom_left}{half_wall}{door}{half_wall}{bottom_right}'.format(
-                        bottom_left=self.LINES.get(
+                        bottom_left=self.LINES[
                             (True, True, active_tile.corner_extends('sw', 's'), active_tile.corner_extends('sw', 'w'), )
-                        ),
+                        ],
                         half_wall=half_wall,
                         door=' ' if active_tile.has_door('s') else horizontal_line,
-                        bottom_right=self.LINES.get(
+                        bottom_right=self.LINES[
                             (True, active_tile.corner_extends('se', 'e'), active_tile.corner_extends('se', 's'), True,)
-                        )
+                        ]
                     )
 
                     # Calculate offsets to currently drawing tile, add border widths
@@ -134,3 +141,5 @@ class Ship(object):
 
                     # Draw bottom wall
                     screen.addstr(offset_top + active_tile.SIZE + 1, offset_left, bottom_wall)
+
+                    active_tile.draw(screen, offset_left + 1, offset_top + 1)

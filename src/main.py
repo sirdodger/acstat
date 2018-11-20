@@ -9,9 +9,15 @@ from __future__ import annotations
 import curses
 
 import ship
+import ships_predefined
 
 
 def start_main_loop(screen):
+    """Run the main draw/wait for keypress loop.
+
+    :param screen: The curses screen.
+
+    """
     curses.noecho()
     curses.cbreak()
     screen.keypad(True)
@@ -20,42 +26,42 @@ def start_main_loop(screen):
     cursor_x = 0
     cursor_y = 0
 
-    # Clear and refresh the screen for a blank canvas
-    screen.clear()
-    screen.refresh()
-
     # Start colors in curses
     curses.start_color()
-    curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK)
-    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
-    curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
+    curses.use_default_colors()
+    for i in range(0, 255):
+        curses.init_pair(i + 1, i, -1)
 
     while k != ord('q'):
-        # Initialization
+
         screen.clear()
-        height, width = screen.getmaxyx()
 
-        if k == curses.KEY_DOWN:
-            cursor_y = cursor_y + 1
-        elif k == curses.KEY_UP:
-            cursor_y = cursor_y - 1
-        elif k == curses.KEY_RIGHT:
-            cursor_x = cursor_x + 1
-        elif k == curses.KEY_LEFT:
-            cursor_x = cursor_x - 1
+        if k == ord('p'):
+            screen.clear()
+            for i in range(0, 255):
+                screen.addstr(str(i) + ' ', curses.color_pair(i))
 
-        cursor_x = max(0, cursor_x)
-        cursor_x = min(width - 1, cursor_x)
+        else:
 
-        cursor_y = max(0, cursor_y)
-        cursor_y = min(height - 1, cursor_y)
+            height, width = screen.getmaxyx()
 
-        s = ship.Ship([
-            [None, 'cr', None, ],
-            ['cr', 'cr', 'cr', ],
-            [None, 'cr', None, ],
-        ])
-        s.draw(screen)
+            if k == curses.KEY_DOWN:
+                cursor_y += 1
+            elif k == curses.KEY_UP:
+                cursor_y -= 1
+            elif k == curses.KEY_RIGHT:
+                cursor_x += 1
+            elif k == curses.KEY_LEFT:
+                cursor_x -= 1
+
+            cursor_x = max(0, cursor_x)
+            cursor_x = min(width - 1, cursor_x)
+
+            cursor_y = max(0, cursor_y)
+            cursor_y = min(height - 1, cursor_y)
+
+            s = ship.Ship(ships_predefined.roach_9)
+            s.draw(screen)
 
         # Refresh the screen
         screen.refresh()

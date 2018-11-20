@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+
+"""Science bay tile.
+
+"""
+
+from __future__ import annotations
+
+import typing
+
+import colors
+import tiles.ship_square
+from .ship_square import (
+    ActionSquare,
+    BlankSquare,
+    DecorativeSquare,
+)
+from .tile import Tile
+
+
+class ScienceTile(Tile):
+    """The science bay shields the ship, collects mission data, broadcasts missile countermeasures, acquires targeting
+    locks on enemy vessels, scans nearby space hexes, and answers yes/no questions about the area.
+
+    It is required on all ships.
+
+    """
+
+    ABBREVIATION: str = 'sc'
+
+    COLOR = colors.GREEN_BACKGROUND
+
+    DEFINITION: typing.List[typing.List[typing.Type[tiles.ship_square.ShipSquare]]] = [
+        [BlankSquare,      BlankSquare,      BlankSquare,      DecorativeSquare, DecorativeSquare, ],
+        [BlankSquare,      DecorativeSquare, BlankSquare,      ActionSquare,     DecorativeSquare, ],
+        [BlankSquare,      DecorativeSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, ],
+        [BlankSquare,      DecorativeSquare, BlankSquare,      ActionSquare,     DecorativeSquare, ],
+        [BlankSquare,      BlankSquare,      BlankSquare,      DecorativeSquare, DecorativeSquare, ],
+    ]
+
+    DOORS: typing.Dict[str, bool] = {
+        'n': True,
+        's': True,
+        'e': False,
+        'w': True,
+    }
+
+    # The (x, y) coordinates targeted by a die roll.
+    TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {
+        1: (2, 0, ),
+        2: (0, 1, ),
+        3: (0, 2, ),
+        4: (0, 4, ),
+        5: (2, 4, ),
+        6: (3, 1, ),
+    }
