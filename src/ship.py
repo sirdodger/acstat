@@ -35,7 +35,11 @@ class Ship(object):
         (True, True, True, True, ):   '╬',  # ASCII 206
     }
 
-    def __init__(self, definition: typing.Sequence[typing.Sequence[typing.Optional[str]]]) -> None:
+    def __init__(
+            self,
+            definition: typing.Sequence[typing.Sequence[typing.Optional[str]]],
+            rotation: typing.Sequence[typing.Sequence[int]]
+    ) -> None:
         """Create a ship from a 2D array of string tile abbreviations.
 
         :param definition: 2D array of tile abbreviations.
@@ -49,7 +53,7 @@ class Ship(object):
 
                 tile_class = tiles.TILES.get(tile_abbreviation)
                 if tile_class:
-                    ship_row.append(tile_class(self, x, y))
+                    ship_row.append(tile_class(self, x, y, rotation[y][x]))
                     tile_count += 1
                 else:
                     ship_row.append(None)

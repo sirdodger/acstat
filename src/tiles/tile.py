@@ -6,12 +6,15 @@
 
 from __future__ import annotations
 
+import collections
+import contextlib
 import functools
 import typing
 
 import colors
 import ship  # Circular import for typing only
 import tiles.ship_square
+import utils
 
 
 class Tile(object):
@@ -22,18 +25,15 @@ class Tile(object):
     ABBREVIATION: str = ''
     COLOR: int = colors.WHITE
     DEFINITION: typing.List[typing.List[typing.Type[tiles.ship_square.ShipSquare]]] = []
-    DOORS: typing.Dict[str, bool] = {
-        'n': True,
-        's': True,
-        'e': True,
-        'w': True,
-    }
+
+    # Top, right, bottom, left
+    DOORS: typing.List[bool] = [True, True, True, True]
 
     SIZE: int = 5
     TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {}
     WALL_CHAR: str = '#'
 
-    def __init__(self, parent_ship: ship.Ship, location_x: int, location_y: int) -> None:
+    def __init__(self, parent_ship: ship.Ship, location_x: int, location_y: int, rotation: int = 0) -> None:
         """Create a ship from a 2D array of tile abbreviations.
 
         :param parent_ship: The parent ship containing this tile.
@@ -41,15 +41,21 @@ class Tile(object):
         :param location_x: The x value of the tile in the ship's structure.
 
         :param location_y: The y value of the tile in the ship's structure.
+
+        :param rotation: Thu number of clockwise 90-degree rotations.
+
         """
-        self.parent_ship = parent_ship
-        self.location_x = location_x
-        self.location_y = location_y
+        self.parent_ship: ship.Ship = parent_ship
+        self.location_x: int = location_x
+        self.location_y: int = location_y
+        self.rotation: int = rotation
 
         squares = []
 
+        rotated_definition = utils.rotate_2d_array(self.DEFINITION, rotation)
+
         _definition_row: typing.List[typing.Type[tiles.ship_square.ShipSquare]]
-        for y, _definition_row in enumerate(self.DEFINITION):
+        for y, _definition_row in enumerate(rotated_definition):
             square_row = []
             for x, square_class in enumerate(_definition_row):
 
@@ -60,6 +66,9 @@ class Tile(object):
 
             squares.append(square_row)
 
+        rotated_doors = collections.deque(self.DOORS)
+        rotated_doors.rotate(rotation)
+        self._doors = {'n': rotated_doors[0], 'e': rotated_doors[1], 's': rotated_doors[2], 'w': rotated_doors[3], }
         self._squares: typing.Sequence[typing.Sequence[tiles.ship_square.ShipSquare]] = squares
 
     @functools.lru_cache(maxsize=8)
@@ -102,7 +111,7 @@ class Tile(object):
         :return: True if door exists, False otherwise.
 
         """
-        return self.DOORS[direction] and self.has_neighbor(direction)
+        return self._doors[direction] and self.has_neighbor(direction)
 
     def has_neighbor(self, direction: str) -> bool:
         """Does the tile have a neighbor in a particular direction?
@@ -142,8 +151,13 @@ class Tile(object):
         elif 'w' in direction:
             x -= 1
 
+        # Variable is used if suppress() catches an exception.
+        # noinspection PyUnusedLocal
         neighbor = None
-        if (0 <= x < self.SIZE) and (0 <= y < self.SIZE):
+        with contextlib.suppress(IndexError):
+            # Indexes of -1 will return the rightmost element instead of raising an exception, so force-raise one
+            if x < 0 or y < 0:
+                raise IndexError
             neighbor = self.parent_ship.get_tile_by_position(x, y)
 
         return neighbor

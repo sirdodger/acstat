@@ -38,12 +38,8 @@ class MissileTile(Tile):
         [BlankSquare,      BlankSquare,      ActionSquare,     BlankSquare,      BlankSquare,      ],
     ]
 
-    DOORS: typing.Dict[str, bool] = {
-        'n': False,
-        's': True,
-        'e': True,
-        'w': True,
-    }
+    # Top, right, bottom, left
+    DOORS: typing.List[bool] = [False, True, True, True]
 
     # The (x, y) coordinates targeted by a die roll.
     TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {

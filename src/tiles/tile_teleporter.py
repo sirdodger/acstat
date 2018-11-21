@@ -36,13 +36,6 @@ class TeleporterTile(Tile):
         [DecorativeSquare, DecorativeSquare, BlankSquare,      DecorativeSquare, DecorativeSquare, ],
     ]
 
-    DOORS: typing.Dict[str, bool] = {
-        'n': True,
-        's': True,
-        'e': True,
-        'w': True,
-    }
-
     # The (x, y) coordinates targeted by a die roll.
     TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {
         1: (2, 0, ),

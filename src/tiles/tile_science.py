@@ -38,12 +38,8 @@ class ScienceTile(Tile):
         [BlankSquare,      BlankSquare,      BlankSquare,      DecorativeSquare, DecorativeSquare, ],
     ]
 
-    DOORS: typing.Dict[str, bool] = {
-        'n': True,
-        's': True,
-        'e': False,
-        'w': True,
-    }
+    # Top, right, bottom, left
+    DOORS: typing.List[bool] = [True, False, True, True]
 
     # The (x, y) coordinates targeted by a die roll.
     TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {

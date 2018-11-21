@@ -36,12 +36,8 @@ class EngineTile(Tile):
         [DecorativeSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, ],
     ]
 
-    DOORS: typing.Dict[str, bool] = {
-        'n': True,
-        's': False,
-        'e': True,
-        'w': True,
-    }
+    # Top, right, bottom, left
+    DOORS: typing.List[bool] = [True, True, False, True]
 
     # The (x, y) coordinates targeted by a die roll.
     TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {
