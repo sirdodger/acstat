@@ -47,18 +47,24 @@ class Ship(object):
         tile_count = 0
         structure = []
 
+        center_x = 0.0
+        center_y = 0.0
         for y, definition_row in enumerate(definition):
             ship_row = []
             for x, tile_abbreviation in enumerate(definition_row):
-
                 tile_class = tiles.TILES.get(tile_abbreviation)
                 if tile_class:
+                    center_x += x
+                    center_y += y
                     ship_row.append(tile_class(self, x, y, rotation[y][x]))
                     tile_count += 1
                 else:
                     ship_row.append(None)
 
             structure.append(ship_row)
+
+        # Find the coordinates of the tile containing the center of mass.
+        self.center = int(center_x / tile_count), int(center_y / tile_count)
 
         # The size of a ship determines difficulty numbers, targeting silhouette, etc.
         self.size = int(math.ceil(((tile_count - 6) / 3.0 ) + 4))
@@ -76,11 +82,15 @@ class Ship(object):
         """
         return self._structure[y][x]
 
-    def draw(self, screen: typing.Any) -> None:
+    def draw(self, screen: typing.Any, offset_x: int = 0, offset_y: int = 0) -> None:
         """Draw a ship to ASCII.
 
         :param screen: The curses window.
         :type screen: The curses window as returned from curses.initscr() et al.
+
+        :param offset_x: The x offset at which to start drawing the ship.
+
+        :param offset_y: The y offset at which to start drawing the ship.
 
         """
 
@@ -127,8 +137,8 @@ class Ship(object):
                     )
 
                     # Calculate offsets to currently drawing tile, add border widths
-                    offset_left = x * (active_tile.SIZE + 1)
-                    offset_top = y * (active_tile.SIZE + 1)
+                    offset_left = offset_x + x * (active_tile.SIZE + 1)
+                    offset_top = offset_y + y * (active_tile.SIZE + 1)
 
                     # Draw top wall
                     screen.addstr(offset_top, offset_left, top_wall)
