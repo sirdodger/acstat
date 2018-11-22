@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import curses
 
+import hexmap
 import ship
 import ships_predefined
 
@@ -60,11 +61,14 @@ def start_main_loop(screen):
             cursor_y = max(0, cursor_y)
             cursor_y = min(height - 1, cursor_y)
 
-            s = ship.Ship(ships_predefined.chuck_torus_ii, ships_predefined.chuck_torus_ii_rotation)
-            s.draw(screen, offset_x=5, offset_y=5)
+            #s = ship.Ship(ships_predefined.chuck_torus_ii, ships_predefined.chuck_torus_ii_rotation)
+            #s.draw(screen, offset_x=60, offset_y=3)
 
-            # s2 = ship.Ship(ships_predefined.roach_9, ships_predefined.roach_9_rotation)
-            # s2.draw(screen)
+            s2 = ship.Ship(ships_predefined.roach_9, ships_predefined.roach_9_rotation)
+            s2.draw(screen, offset_x=60, offset_y=3)
+
+            galaxy = hexmap.HexMap(11, 11)
+            galaxy.draw(screen, offset_x=0, offset_y=3)
 
         # Refresh the screen
         screen.refresh()
