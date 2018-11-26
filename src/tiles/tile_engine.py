@@ -13,7 +13,7 @@ import tiles.ship_square
 from .ship_square import (
     ActionSquare,
     BlankSquare,
-    DecorativeSquare,
+    MachineSquare,
 )
 from .tile import Tile
 
@@ -29,11 +29,11 @@ class EngineTile(Tile):
     COLOR = colors.BLUE_BACKGROUND
 
     DEFINITION: typing.List[typing.List[typing.Type[tiles.ship_square.ShipSquare]]] = [
-        [BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      ],
-        [BlankSquare,      DecorativeSquare, DecorativeSquare, DecorativeSquare, BlankSquare,      ],
-        [BlankSquare,      DecorativeSquare, DecorativeSquare, DecorativeSquare, BlankSquare,      ],
-        [BlankSquare,      ActionSquare,     DecorativeSquare, ActionSquare,     BlankSquare,      ],
-        [DecorativeSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, ],
+        [BlankSquare,   BlankSquare,   BlankSquare,   BlankSquare,   BlankSquare,   ],
+        [BlankSquare,   MachineSquare, MachineSquare, MachineSquare, BlankSquare,   ],
+        [BlankSquare,   MachineSquare, MachineSquare, MachineSquare, BlankSquare,   ],
+        [BlankSquare,   ActionSquare,  MachineSquare, ActionSquare,  BlankSquare,   ],
+        [MachineSquare, MachineSquare, MachineSquare, MachineSquare, MachineSquare, ],
     ]
 
     # Top, right, bottom, left

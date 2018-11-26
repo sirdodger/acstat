@@ -13,7 +13,7 @@ import tiles.ship_square
 from tiles.ship_square import (
     ActionSquare,
     BlankSquare,
-    DecorativeSquare,
+    MachineSquare,
 )
 from .tile import Tile
 
@@ -32,11 +32,11 @@ class CannonTile(Tile):
     COLOR: int = colors.RED_BACKGROUND
 
     DEFINITION: typing.List[typing.List[typing.Type[tiles.ship_square.ShipSquare]]] = [
-        [BlankSquare, BlankSquare,      DecorativeSquare, BlankSquare,      BlankSquare, ],
-        [BlankSquare, BlankSquare,      DecorativeSquare, BlankSquare,      BlankSquare, ],
-        [BlankSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, BlankSquare, ],
-        [BlankSquare, DecorativeSquare, ActionSquare,     DecorativeSquare, BlankSquare, ],
-        [BlankSquare, BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare, ],
+        [BlankSquare, BlankSquare,   MachineSquare, BlankSquare,   BlankSquare, ],
+        [BlankSquare, BlankSquare,   MachineSquare, BlankSquare,   BlankSquare, ],
+        [BlankSquare, MachineSquare, MachineSquare, MachineSquare, BlankSquare, ],
+        [BlankSquare, MachineSquare, ActionSquare,  MachineSquare, BlankSquare, ],
+        [BlankSquare, BlankSquare,   BlankSquare,   BlankSquare,   BlankSquare, ],
     ]
 
     # Top, right, bottom, left

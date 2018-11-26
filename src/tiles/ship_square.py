@@ -37,8 +37,8 @@ class ShipSquare(object):
         screen.addstr(offset_y, offset_x, self.CHARACTER, curses.color_pair(color))
 
 
-class DecorativeSquare(ShipSquare):
-    """A decorative square that cannot be interacted with in any way.
+class MachineSquare(ShipSquare):
+    """The machinery of the module.  It cannot be interacted with except to have cargo or passengers crammed into it.
 
     """
     CHARACTER = '█'
@@ -62,10 +62,3 @@ class BlankSquare(InteractiveSquare):
 
     """
     CHARACTER = ' '
-
-
-class TractorSquare(BlankSquare):
-    """The tractor beam pulls objects into this otherwise featureless square.
-
-    """
-    CHARACTER = '▀'

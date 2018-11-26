@@ -13,7 +13,7 @@ import tiles.ship_square
 from .ship_square import (
     ActionSquare,
     BlankSquare,
-    DecorativeSquare,
+    MachineSquare,
 )
 from .tile import Tile
 
@@ -29,9 +29,9 @@ class TeleporterTile(Tile):
     COLOR = colors.GREEN_BACKGROUND
 
     DEFINITION: typing.List[typing.List[typing.Type[tiles.ship_square.ShipSquare]]] = [
-        [DecorativeSquare, DecorativeSquare, BlankSquare,      DecorativeSquare, DecorativeSquare, ],
-        [DecorativeSquare, ActionSquare,     BlankSquare,      BlankSquare,      DecorativeSquare, ],
-        [BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      ],
-        [DecorativeSquare, BlankSquare,      BlankSquare,      ActionSquare,     DecorativeSquare, ],
-        [DecorativeSquare, DecorativeSquare, BlankSquare,      DecorativeSquare, DecorativeSquare, ],
+        [MachineSquare, MachineSquare, BlankSquare, MachineSquare, MachineSquare, ],
+        [MachineSquare, ActionSquare,  BlankSquare, BlankSquare,   MachineSquare, ],
+        [BlankSquare,   BlankSquare,   BlankSquare, BlankSquare,   BlankSquare,   ],
+        [MachineSquare, BlankSquare,   BlankSquare, ActionSquare,  MachineSquare, ],
+        [MachineSquare, MachineSquare, BlankSquare, MachineSquare, MachineSquare, ],
     ]

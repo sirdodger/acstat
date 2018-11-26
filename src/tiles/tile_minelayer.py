@@ -13,7 +13,7 @@ import tiles.ship_square
 from .ship_square import (
     ActionSquare,
     BlankSquare,
-    DecorativeSquare,
+    MachineSquare,
 )
 from .tile import Tile
 
@@ -29,11 +29,11 @@ class MineLayerTile(Tile):
     COLOR = colors.BLUE_BACKGROUND
 
     DEFINITION: typing.List[typing.List[typing.Type[tiles.ship_square.ShipSquare]]] = [
-        [DecorativeSquare, BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      ],
-        [DecorativeSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, BlankSquare,      ],
-        [DecorativeSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, BlankSquare,      ],
-        [DecorativeSquare, ActionSquare,     BlankSquare,      BlankSquare,      BlankSquare,      ],
-        [DecorativeSquare, DecorativeSquare, BlankSquare,      BlankSquare,      DecorativeSquare, ],
+        [MachineSquare, BlankSquare,   BlankSquare,   BlankSquare,   BlankSquare,   ],
+        [MachineSquare, MachineSquare, MachineSquare, MachineSquare, BlankSquare,   ],
+        [MachineSquare, MachineSquare, MachineSquare, MachineSquare, BlankSquare,   ],
+        [MachineSquare, ActionSquare,  BlankSquare,   BlankSquare,   BlankSquare,   ],
+        [MachineSquare, MachineSquare, BlankSquare,   BlankSquare,   MachineSquare, ],
     ]
 
     # Top, right, bottom, left

@@ -13,7 +13,7 @@ import tiles.ship_square
 from .ship_square import (
     ActionSquare,
     BlankSquare,
-    DecorativeSquare,
+    MachineSquare,
 )
 from .tile import Tile
 
@@ -31,9 +31,9 @@ class HyperdriveTile(Tile):
     COLOR = colors.GREEN_BACKGROUND
 
     DEFINITION: typing.List[typing.List[typing.Type[tiles.ship_square.ShipSquare]]] = [
-        [BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      ],
-        [BlankSquare,      DecorativeSquare, DecorativeSquare, DecorativeSquare, BlankSquare,      ],
-        [BlankSquare,      DecorativeSquare, ActionSquare,     DecorativeSquare, BlankSquare,      ],
-        [BlankSquare,      DecorativeSquare, BlankSquare,      DecorativeSquare, BlankSquare,      ],
-        [BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      ],
+        [BlankSquare, BlankSquare,   BlankSquare,   BlankSquare,   BlankSquare, ],
+        [BlankSquare, MachineSquare, MachineSquare, MachineSquare, BlankSquare, ],
+        [BlankSquare, MachineSquare, ActionSquare,  MachineSquare, BlankSquare, ],
+        [BlankSquare, MachineSquare, BlankSquare,   MachineSquare, BlankSquare, ],
+        [BlankSquare, BlankSquare,   BlankSquare,   BlankSquare,   BlankSquare, ],
     ]

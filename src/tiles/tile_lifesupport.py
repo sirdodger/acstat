@@ -12,7 +12,7 @@ import colors
 import tiles.ship_square
 from .ship_square import (
     BlankSquare,
-    DecorativeSquare,
+    MachineSquare,
 )
 from .tile import Tile
 
@@ -28,9 +28,9 @@ class LifeSupportTile(Tile):
     COLOR = colors.WHITE
 
     DEFINITION: typing.List[typing.List[typing.Type[tiles.ship_square.ShipSquare]]] = [
-        [DecorativeSquare, DecorativeSquare, BlankSquare, DecorativeSquare, DecorativeSquare, ],
-        [DecorativeSquare, DecorativeSquare, BlankSquare, DecorativeSquare, DecorativeSquare, ],
-        [BlankSquare,      BlankSquare,      BlankSquare, BlankSquare,      BlankSquare,      ],
-        [DecorativeSquare, DecorativeSquare, BlankSquare, DecorativeSquare, DecorativeSquare, ],
-        [DecorativeSquare, DecorativeSquare, BlankSquare, DecorativeSquare, DecorativeSquare, ],
+        [MachineSquare, MachineSquare, BlankSquare, MachineSquare, MachineSquare, ],
+        [MachineSquare, MachineSquare, BlankSquare, MachineSquare, MachineSquare, ],
+        [BlankSquare,   BlankSquare,   BlankSquare, BlankSquare,   BlankSquare,   ],
+        [MachineSquare, MachineSquare, BlankSquare, MachineSquare, MachineSquare, ],
+        [MachineSquare, MachineSquare, BlankSquare, MachineSquare, MachineSquare, ],
     ]

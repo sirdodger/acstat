@@ -13,7 +13,7 @@ import tiles.ship_square
 from .ship_square import (
     ActionSquare,
     BlankSquare,
-    DecorativeSquare,
+    MachineSquare,
 )
 from .tile import Tile
 
@@ -31,11 +31,11 @@ class ScienceTile(Tile):
     COLOR = colors.GREEN_BACKGROUND
 
     DEFINITION: typing.List[typing.List[typing.Type[tiles.ship_square.ShipSquare]]] = [
-        [BlankSquare,      BlankSquare,      BlankSquare,      DecorativeSquare, DecorativeSquare, ],
-        [BlankSquare,      DecorativeSquare, BlankSquare,      ActionSquare,     DecorativeSquare, ],
-        [BlankSquare,      DecorativeSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, ],
-        [BlankSquare,      DecorativeSquare, BlankSquare,      ActionSquare,     DecorativeSquare, ],
-        [BlankSquare,      BlankSquare,      BlankSquare,      DecorativeSquare, DecorativeSquare, ],
+        [BlankSquare, BlankSquare,   BlankSquare,   MachineSquare, MachineSquare, ],
+        [BlankSquare, MachineSquare, BlankSquare,   ActionSquare,  MachineSquare, ],
+        [BlankSquare, MachineSquare, MachineSquare, MachineSquare, MachineSquare, ],
+        [BlankSquare, MachineSquare, BlankSquare,   ActionSquare,  MachineSquare, ],
+        [BlankSquare, BlankSquare,   BlankSquare,   MachineSquare, MachineSquare, ],
     ]
 
     # Top, right, bottom, left

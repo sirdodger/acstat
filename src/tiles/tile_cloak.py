@@ -13,7 +13,7 @@ import tiles.ship_square
 from .ship_square import (
     ActionSquare,
     BlankSquare,
-    DecorativeSquare,
+    MachineSquare,
 )
 from .tile import Tile
 
@@ -27,11 +27,11 @@ class CloakingTile(Tile):
     COLOR = colors.GREEN_BACKGROUND
 
     DEFINITION: typing.List[typing.List[typing.Type[tiles.ship_square.ShipSquare]]] = [
-        [DecorativeSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, DecorativeSquare, ],
-        [DecorativeSquare, DecorativeSquare, ActionSquare,     BlankSquare,      DecorativeSquare, ],
-        [BlankSquare,      DecorativeSquare, BlankSquare,      BlankSquare,      BlankSquare,      ],
-        [BlankSquare,      DecorativeSquare, DecorativeSquare, BlankSquare,      DecorativeSquare, ],
-        [BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      DecorativeSquare, ],
+        [MachineSquare, MachineSquare, MachineSquare, MachineSquare, MachineSquare, ],
+        [MachineSquare, MachineSquare, ActionSquare,  BlankSquare,   MachineSquare, ],
+        [BlankSquare,   MachineSquare, BlankSquare,   BlankSquare,   BlankSquare,   ],
+        [BlankSquare,   MachineSquare, MachineSquare, BlankSquare,   MachineSquare, ],
+        [BlankSquare,   BlankSquare,   BlankSquare,   BlankSquare,   MachineSquare, ],
     ]
 
     # Top, right, bottom, left
