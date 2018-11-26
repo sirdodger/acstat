@@ -31,12 +31,3 @@ class CargoTile(Tile):
         [BlankSquare, BlankSquare, BlankSquare, BlankSquare, BlankSquare, ],
         [BlankSquare, BlankSquare, BlankSquare, BlankSquare, BlankSquare, ],
     ]
-
-    # The (x, y) coordinates targeted by a die roll.
-    TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {
-        1: (0, 2, ),
-        2: (1, 4, ),
-        3: (1, 0, ),
-        4: (0, 4, ),
-        5: (3, 4, ),
-    }

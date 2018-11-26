@@ -34,13 +34,3 @@ class LifeSupportTile(Tile):
         [DecorativeSquare, DecorativeSquare, BlankSquare, DecorativeSquare, DecorativeSquare, ],
         [DecorativeSquare, DecorativeSquare, BlankSquare, DecorativeSquare, DecorativeSquare, ],
     ]
-
-    # The (x, y) coordinates targeted by a die roll.
-    TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {
-        1: (2, 0, ),
-        2: (1, 2, ),
-        3: (4, 2, ),
-        4: (2, 2, ),
-        5: (2, 4, ),
-        6: (2, 3, ),
-    }

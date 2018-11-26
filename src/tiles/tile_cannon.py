@@ -41,13 +41,3 @@ class CannonTile(Tile):
 
     # Top, right, bottom, left
     DOORS: typing.List[bool] = [False, True, True, True]
-
-    # The (x, y) coordinates targeted by a die roll.
-    TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {
-        1: (4, 0, ),
-        2: (1, 1, ),
-        3: (4, 2, ),
-        4: (1, 4, ),
-        5: (3, 4, ),
-        6: (2, 3, ),
-    }

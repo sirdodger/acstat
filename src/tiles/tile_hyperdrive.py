@@ -37,13 +37,3 @@ class HyperdriveTile(Tile):
         [BlankSquare,      DecorativeSquare, BlankSquare,      DecorativeSquare, BlankSquare,      ],
         [BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      BlankSquare,      ],
     ]
-
-    # The (x, y) coordinates targeted by a die roll.
-    TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {
-        1: (4, 3, ),
-        2: (3, 0, ),
-        3: (2, 4, ),
-        4: (0, 0, ),
-        5: (0, 2, ),
-        6: (2, 2, ),
-    }

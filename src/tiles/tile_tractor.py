@@ -38,13 +38,3 @@ class TractorTile(Tile):
 
     # Top, right, bottom, left
     DOORS: typing.List[bool] = [False, True, True, True]
-
-    # The (x, y) coordinates targeted by a die roll.
-    TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {
-        1: (0, 1, ),
-        2: (4, 0, ),
-        3: (2, 1, ),
-        4: (4, 4, ),
-        5: (4, 2, ),
-        6: (2, 2, ),
-    }

@@ -35,13 +35,3 @@ class TeleporterTile(Tile):
         [DecorativeSquare, BlankSquare,      BlankSquare,      ActionSquare,     DecorativeSquare, ],
         [DecorativeSquare, DecorativeSquare, BlankSquare,      DecorativeSquare, DecorativeSquare, ],
     ]
-
-    # The (x, y) coordinates targeted by a die roll.
-    TARGETS: typing.Dict[int, typing.Tuple[int, int]] = {
-        1: (2, 0, ),
-        2: (0, 2, ),
-        3: (3, 3, ),
-        4: (3, 1, ),
-        5: (2, 2, ),
-        6: (1, 1, ),
-    }
