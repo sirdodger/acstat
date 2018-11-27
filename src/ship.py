@@ -67,7 +67,9 @@ class Ship(object):
         self.center = int(center_x / tile_count), int(center_y / tile_count)
 
         # The size of a ship determines difficulty numbers, targeting silhouette, etc.
-        self.size = int(math.ceil(((tile_count - 6) / 3.0 ) + 4))
+        # Jeff Siadek says, "Ship size is figured as 1/3 modules rounded up.  Adding a module means you no longer
+        # conform to the registry layout and lose the registry benefit."
+        self.size = int(math.ceil(tile_count / 3.0 ))
         self._structure: typing.Sequence[typing.Sequence[typing.Optional[tiles.Tile]]] = structure
 
     def get_tile_by_position(self, x: int, y: int) -> tiles.Tile:
