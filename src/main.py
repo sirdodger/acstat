@@ -61,8 +61,8 @@ def start_main_loop(screen):
             cursor_y = max(0, cursor_y)
             cursor_y = min(height - 1, cursor_y)
 
-            #s = ship.Ship(ships_predefined.chuck_torus_ii, ships_predefined.chuck_torus_ii_rotation)
-            #s.draw(screen, offset_x=60, offset_y=3)
+            # s = ship.Ship(ships_predefined.chuck_torus_ii, ships_predefined.chuck_torus_ii_rotation)
+            # s.draw(screen, offset_x=60, offset_y=3)
 
             s2 = ship.Ship(ships_predefined.roach_9, ships_predefined.roach_9_rotation)
             s2.draw(screen, offset_x=60, offset_y=3)

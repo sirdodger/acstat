@@ -2,6 +2,16 @@
 
 """Cargo tile.
 
+"Thirty spokes converge upon a single hub
+ It is the hole in the centre that the purpose of the axle depends.
+ We make a vessel from a lump of clay
+ It is the empty space within the vessel that makes it useful.
+ We make doors and windows for a room.
+ But it is the those empty spaces that make the room habitable.
+ Thus while the tangible has advantages
+ It is the intangible that makes it useful."
+   - Laozi / Steven Groak
+
 """
 
 from __future__ import annotations
