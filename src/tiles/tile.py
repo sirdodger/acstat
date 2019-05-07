@@ -17,7 +17,7 @@ import tiles.ship_square
 import utils
 
 
-class Tile(object):
+class Tile:
     """A single room on a ship.
 
     """

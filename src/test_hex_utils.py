@@ -51,6 +51,18 @@ class HexTests(unittest.TestCase):
         self.assertEqual(4, h.y)
         self.assertEqual(-5, h.z)
 
+    def test_add_direction(self):
+        """Take a step in each direction.
+
+        """
+        h = hex_utils.Hex(0, 0)
+        self.assertEqual(hex_utils.Hex(0, 1, -1), h + hex_utils.DIRECTIONS['NW'])
+        self.assertEqual(hex_utils.Hex(1, 0, -1), h + hex_utils.DIRECTIONS['NE'])
+        self.assertEqual(hex_utils.Hex(1, -1, 0), h + hex_utils.DIRECTIONS['E'])
+        self.assertEqual(hex_utils.Hex(0, -1, 1), h + hex_utils.DIRECTIONS['SE'])
+        self.assertEqual(hex_utils.Hex(-1, 0, 1), h + hex_utils.DIRECTIONS['SW'])
+        self.assertEqual(hex_utils.Hex(-1, 1, 0), h + hex_utils.DIRECTIONS['W'])
+
     def test_eq(self):
         """Two hexes with the same coordinates are equal.
 
@@ -67,17 +79,10 @@ class HexTests(unittest.TestCase):
         s = repr(h)
         self.assertEqual('Hex(1, -4, 3)', s)
 
-    def test_direction(self):
-        """Take a step in each direction.
-
-        """
+    def test_sub(self):
         h = hex_utils.Hex(0, 0)
-        self.assertEqual(hex_utils.Hex(0, 1, -1), h + hex_utils.DIRECTIONS['NW'])
-        self.assertEqual(hex_utils.Hex(1, 0, -1), h + hex_utils.DIRECTIONS['NE'])
-        self.assertEqual(hex_utils.Hex(1, -1, 0), h + hex_utils.DIRECTIONS['E'])
-        self.assertEqual(hex_utils.Hex(0, -1, 1), h + hex_utils.DIRECTIONS['SE'])
-        self.assertEqual(hex_utils.Hex(-1, 0, 1), h + hex_utils.DIRECTIONS['SW'])
-        self.assertEqual(hex_utils.Hex(-1, 1, 0), h + hex_utils.DIRECTIONS['W'])
+        h2 = hex_utils.Hex(3, -1)
+        self.assertEqual(h, h + h2 - h2)
 
     def test_distance(self):
         """Distance between hexes.

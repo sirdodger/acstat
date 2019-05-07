@@ -7,7 +7,7 @@
 import typing
 
 
-class HexMap(object):
+class HexMap:
     """A map of explorable space.
 
     """

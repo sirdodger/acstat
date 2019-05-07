@@ -22,7 +22,7 @@ def lerp(
     return (end - start) * weight + start
 
 
-class Hex(object):
+class Hex:
     """A hex coordinate.
 
     """

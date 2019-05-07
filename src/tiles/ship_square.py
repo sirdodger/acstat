@@ -10,7 +10,7 @@ import curses
 import typing
 
 
-class ShipSquare(object):
+class ShipSquare:
     """An individual square on a ship tile.
 
     """

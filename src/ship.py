@@ -12,7 +12,7 @@ import typing
 import tiles
 
 
-class Ship(object):
+class Ship:
     """A spaceship comprised of tiles.
 
     """
